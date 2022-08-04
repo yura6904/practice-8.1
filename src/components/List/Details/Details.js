@@ -1,3 +1,4 @@
+import propTypes from 'prop-types'
 
 function Details(props) {
   return (
@@ -11,6 +12,10 @@ function Details(props) {
       ) : null}
     </div>
   );
+}
+
+Details.propTypes = {
+  selectedHum: propTypes.object
 }
 
 export default Details;

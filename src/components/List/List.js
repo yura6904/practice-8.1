@@ -1,4 +1,5 @@
 import Details from "./Details/Details";
+import propTypes from 'prop-types'
 
 function List(props) {
   return (
@@ -13,6 +14,10 @@ function List(props) {
       <Details selectedHum={props.selectedHum}/>
     </div>
   );
+}
+
+List.propTypes = {
+  data: propTypes.object
 }
 
 export default List;
