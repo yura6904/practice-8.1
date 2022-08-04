@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import List from './components/List/List';
 
 function App() {
+  const [selectedHum, setSelectedHum] = useState()
+  const [data, setData] = useState()
+
+  const selectId = async (id) => {
+    let response = await fetch(`https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/${id}.json`)
+    await setSelectedHum(await response.json())
+  }
+  
+  useEffect(() => {
+    async function fetchData() {
+      let response = await fetch('https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/users.json')
+      await setData(await response.json())
+    }
+    fetchData()
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <List data={data} selectId={selectId} selectedHum={selectedHum}/>
     </div>
   );
 }
